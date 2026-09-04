@@ -1,0 +1,20 @@
+{
+  "name": "superpowers-orchestrator-dev",
+  "interface": {
+    "displayName": "Superpowers Orchestrator Dev"
+  },
+  "plugins": [
+    {
+      "name": "superpowers-orchestrator",
+      "source": {
+        "source": "url",
+        "url": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
