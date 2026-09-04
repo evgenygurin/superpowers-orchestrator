@@ -13,8 +13,8 @@ Operationalize Superpowers inside OpenCode without forking upstream methodology.
 - [x] Add the durable task/worker protocol.
 - [x] Install the official Superpowers plugin as the upstream dependency.
 - [x] Run a live OpenCode smoke test using the orchestrator agent.
-- [ ] Review the implementation for specification compliance.
-- [ ] Run final verification and inspect the complete diff.
+- [x] Review the implementation for specification compliance.
+- [x] Run final verification and inspect the complete diff.
 
 ## Verification
 
@@ -48,3 +48,10 @@ The decisive regression test was to run the same headless command with stdin red
 Implemented `.opencode/bin/opencode-run`, which invokes `opencode run` and forces `< /dev/null`. Added `tests/pressure/check-stdin-closure.sh` and `tests/pressure/stdin-closure.md`; the regression test is RED before the wrapper exists and GREEN after implementation. A live wrapper smoke test returned `WRAPPER_SMOKE_OK`.
 
 This is a runtime workaround for headless orchestration. Interactive/TUI launches remain unchanged.
+
+
+## Review gate outcome
+
+An independent OpenCode reviewer was attempted through the governed headless launcher and through a read-only primary agent. Both attempts terminated with `MCP error -32001: Request timed out` before producing a review report. The repository diff was therefore reviewed statically against the review-gate acceptance criteria, but this does not substitute for an independent Superpowers worker review.
+
+The branch must not be treated as having a passed review gate solely from the static inspection.
