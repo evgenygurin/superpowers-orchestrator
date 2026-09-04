@@ -3,7 +3,7 @@ description: Read-only reviewer for specification compliance, code quality, and 
 mode: subagent
 permission:
   edit: deny
-  bash: deny
+  bash: ask
   task: deny
   read: allow
   glob: allow
