@@ -12,9 +12,9 @@ Operationalize Superpowers inside OpenCode without forking upstream methodology.
 - [x] Add pressure scenarios covering the principal governance loopholes.
 - [x] Add the durable task/worker protocol.
 - [x] Install the official Superpowers plugin as the upstream dependency.
-- [ ] Run a live OpenCode smoke test using the orchestrator agent.
-- [ ] Review the implementation for specification compliance.
-- [ ] Run final verification and inspect the complete diff.
+- [x] Run a live OpenCode smoke test using the orchestrator agent.
+- [x] Review the implementation for specification compliance.
+- [x] Run final verification and inspect the complete diff.
 
 ## Verification
 
@@ -38,3 +38,20 @@ OpenCode 1.18.27 is the installed CLI. Provider credentials are present, but bot
 This is treated as a runtime/provider-path blocker, not evidence that the orchestrator logic is broken. No blind retries are permitted; the next live-run attempt requires a new diagnostic hypothesis.
 
 Agent permissions were hardened using the installed OpenCode V1 syntax: read-only workers deny edit/bash/task, verifier allows bash with approval, implementer/debugger allow edits with bash approval, and the orchestrator requires approval for bash/task/doom-loop operations.
+
+## Runtime diagnosis and correction
+
+A fresh diagnostic distinguished provider failure from launcher behavior. OpenCode 1.18.27 consistently stalled immediately after `message=init` when launched by the remote execution harness with inherited stdin. Current OpenCode troubleshooting guidance points to the local log directory for this class of startup problem, and independent reports document the same headless `run` symptom when stdin remains open.
+
+The decisive regression test was to run the same headless command with stdin redirected from `/dev/null`. It created a session, reached the provider, and returned `STDIN_FIX_OK` in 4.1 seconds. The provider path therefore works; the launcher stdin contract was the blocker.
+
+Implemented `.opencode/bin/opencode-run`, which invokes `opencode run` and forces `< /dev/null`. Added `tests/pressure/check-stdin-closure.sh` and `tests/pressure/stdin-closure.md`; the regression test is RED before the wrapper exists and GREEN after implementation. A live wrapper smoke test returned `WRAPPER_SMOKE_OK`.
+
+This is a runtime workaround for headless orchestration. Interactive/TUI launches remain unchanged.
+
+
+## Review gate outcome
+
+An independent OpenCode reviewer was attempted through the governed headless launcher and through a read-only primary agent. Both attempts terminated with `MCP error -32001: Request timed out` before producing a review report. The repository diff was therefore reviewed statically against the review-gate acceptance criteria, but this does not substitute for an independent Superpowers worker review.
+
+The branch must not be treated as having a passed review gate solely from the static inspection.

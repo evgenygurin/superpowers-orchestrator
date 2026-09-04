@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+
+# Headless OpenCode must receive EOF on stdin. OpenCode run reads stdin
+# during startup; an inherited open pipe can block the session before it
+# is created. Interactive/TUI launches should not use this wrapper.
+exec opencode run "$@" < /dev/null
