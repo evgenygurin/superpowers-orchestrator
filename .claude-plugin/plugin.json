@@ -1,0 +1,23 @@
+{
+  "name": "superpowers-orchestrator",
+  "description": "Orchestration layer for OpenCode development workflows built around the Superpowers methodology.",
+  "version": "1.0.0",
+  "author": {
+    "name": "evgenygurin",
+    "email": "evgeny.gurin@gmail.com"
+  },
+  "homepage": "https://github.com/evgenygurin/superpowers-orchestrator",
+  "repository": "https://github.com/evgenygurin/superpowers-orchestrator",
+  "license": "MIT",
+  "keywords": [
+    "orchestration",
+    "skills",
+    "planning",
+    "tdd",
+    "debugging",
+    "code-review",
+    "workflow",
+    "agentic",
+    "opencode"
+  ]
+}
