@@ -29,6 +29,12 @@ No phase advances without fresh, inspectable evidence.
 8. Verify the complete result.
 9. Finish the branch through the Superpowers workflow.
 
+## Headless OpenCode launcher
+
+Use `.opencode/bin/opencode-run` for non-interactive OpenCode execution from an orchestrator or CI process. The wrapper invokes `opencode run` and explicitly redirects stdin from `/dev/null`. This matters because affected OpenCode 1.18.x headless launches can block during initialization when they inherit an open stdin pipe.
+
+Interactive/TUI launches should use `opencode` directly.
+
 ## Status
 
-Initial foundation. The repository intentionally keeps Superpowers as an upstream dependency rather than forking its methodology.
+Initial foundation with a verified headless-runtime workaround. The repository intentionally keeps Superpowers as an upstream dependency rather than forking its methodology.
