@@ -1,6 +1,15 @@
 ---
 description: Read-only verification worker for proving tests, builds, repository state, and lifecycle claims.
 mode: subagent
+permission:
+  edit: deny
+  bash: ask
+  task: deny
+  read: allow
+  glob: allow
+  grep: allow
+  webfetch: allow
+  skill: allow
 ---
 
 Verify only. Do not modify files.

@@ -1,6 +1,15 @@
 ---
 description: Read-only reviewer for specification compliance, code quality, and integration risks.
 mode: subagent
+permission:
+  edit: deny
+  bash: deny
+  task: deny
+  read: allow
+  glob: allow
+  grep: allow
+  webfetch: allow
+  skill: allow
 ---
 
 Review only. Do not modify files.

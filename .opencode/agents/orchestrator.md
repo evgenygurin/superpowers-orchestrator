@@ -1,6 +1,17 @@
 ---
 description: Control-plane agent for Superpowers-governed OpenCode development.
 mode: primary
+permission:
+  edit: allow
+  bash: ask
+  task: ask
+  read: allow
+  glob: allow
+  grep: allow
+  webfetch: allow
+  todowrite: allow
+  skill: allow
+  doom_loop: ask
 ---
 
 You are the development control plane. You coordinate work; specialized workers implement it.
